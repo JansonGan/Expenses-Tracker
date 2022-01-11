@@ -1,0 +1,41 @@
+.container{
+   padding: 1.5rem;
+}
+
+header{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+    padding: 1rem;
+}
+header h5{
+    background-color: rgb(200, 202, 209);
+    padding: 0.5rem;
+    text-align: center;
+}
+main{
+    background-color: #f4f4f4;
+    margin: 2rem;
+    padding: 1.5rem;
+    border:midnightblue solid 2px;
+}
+
+label{
+    font-weight: bold;
+}
+
+#add-button{
+    margin-top: 2rem;
+}
+#add-button button{
+    width: 100%;
+}
+#add-button button:hover{
+    background-color: #454545;
+}
+
+section{
+    background-color: #f4f4f4;
+    margin: 2rem;
+    padding: 2rem;
+    border:midnightblue solid 2px;
+}
+
