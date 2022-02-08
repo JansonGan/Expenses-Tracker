@@ -32,7 +32,7 @@ Date.prototype.getWeek = function() {
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000- 3 + (week1.getDay() + 6) % 7) / 7);
   };
 
-app.get("/", function (req, res) {
+app.get("/", function (_req, res) {
 
     Expenses.find({}, function (err, itemFound) {
 
@@ -91,7 +91,7 @@ app.post("/", function (req, res) {
 app.post("/delete", function (req, res) {
     Expenses.findByIdAndDelete({
         _id: req.body.checkbox
-    }, function (err, itemDeleted) {
+    }, function (_err, _itemDeleted) {
 
     });
     res.redirect("/");
