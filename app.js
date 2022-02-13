@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/expensesDB");
+mongoose.connect("mongodb+srv://admin-janson:Test123@cluster0.m4ocz.mongodb.net/expensesDB");
 
 const expensesSchema = new mongoose.Schema({
     description: String,
@@ -103,5 +103,5 @@ if (port == null || port == "") {
     port = 3000;
 }
 app.listen(port, function () {
-    console.log("Server runing successfully.");
+    console.log("Server running successfully.");
 });
