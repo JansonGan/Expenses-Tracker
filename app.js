@@ -78,15 +78,22 @@ app.post("/", function (req, res) {
     const dateSpend = req.body.dateSpend;
     const amount = req.body.amount;
 
-    const newExpense = new Expenses({
-        description: description,
-        date: dateSpend,
-        amount: amount
-    });
+    if (description.length == 0) {
+        alert("Field cannot be empty.");
+    } else {
 
-    newExpense.save();
-    res.redirect("/");
+        const newExpense = new Expenses({
+            description: description,
+            date: dateSpend,
+            amount: amount
+        });
+
+        newExpense.save();
+        res.redirect("/");
+    }
 });
+
+
 
 app.post("/delete", function (req, res) {
     Expenses.findByIdAndDelete({
