@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/expensesDB");
+mongoose.connect("mongodb+srv://admin-janson:Test123@cluster0.m4ocz.mongodb.net/expensesDB");
 
 const expensesSchema = new mongoose.Schema({
     description: String,
@@ -31,8 +31,8 @@ Date.prototype.getWeek = function() {
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000- 3 + (week1.getDay() + 6) % 7) / 7);
   };
-    
-app.get("/", function (req, res) {
+
+app.get("/", function (_req, res) {
 
     Expenses.find({}, function (err, itemFound) {
 
@@ -48,7 +48,7 @@ app.get("/", function (req, res) {
                 }
                 if(item.date.getMonth() === new Date().getMonth()){
                     monthlyExpenses += item.amount;
-    
+
                  }
                  if(item.date.getYear() === new Date().getYear()){
                     yearlyExpenses += item.amount;
@@ -58,7 +58,7 @@ app.get("/", function (req, res) {
                 }
             });
 
-           
+
         }
 
         res.render("index", {
@@ -78,31 +78,37 @@ app.post("/", function (req, res) {
     const dateSpend = req.body.dateSpend;
     const amount = req.body.amount;
 
-    const newExpense = new Expenses({
-        description: description,
-        date: dateSpend,
-        amount: amount
-    });
+    if (description.length == 0) {
+        alert("Field cannot be empty.");
+    } else {
 
-    newExpense.save();
-    res.redirect("/");
+        const newExpense = new Expenses({
+            description: description,
+            date: dateSpend,
+            amount: amount
+        });
+
+        newExpense.save();
+        res.redirect("/");
+    }
 });
+
+
 
 app.post("/delete", function (req, res) {
     Expenses.findByIdAndDelete({
         _id: req.body.checkbox
-    }, function (err, itemDeleted) {
+    }, function (_err, _itemDeleted) {
 
     });
     res.redirect("/");
 });
 
 
-
-
-
-
-
-app.listen(3000, function () {
-    console.log("Server runing on port 3000.");
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+app.listen(port, function () {
+    console.log("Server running successfully.");
 });
